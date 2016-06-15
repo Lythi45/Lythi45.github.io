@@ -165,7 +165,7 @@ href = "Fire-Dateien/style_no_stats.css" >
 
 			var bufferGeometry = new THREE.BufferGeometry();
 
-			var number_v = 10000;
+			var number_v = 25000;
 
 			var vertices = new Float32Array(number_v * 3);
 			var colors = new Float32Array(number_v * 3);
@@ -228,14 +228,14 @@ href = "Fire-Dateien/style_no_stats.css" >
 
 			has_gl = true;
 
-			controls = new THREE.OrbitControls(camera, window);
+			//controls = new THREE.OrbitControls(camera, window);
 			/*controls.target.set(
 			         camera.position.x + 0.15,
 			         camera.position.y,
 			         camera.position.z
 			       );*/
-			controls.enablePan = false;
-			controls.enableZoom = false;
+			//controls.enablePan = false;
+			//controls.enableZoom = false;
 			window.addEventListener('click', fullscreen, false);
 
 			window.addEventListener('resize', onWindowResize, false);
