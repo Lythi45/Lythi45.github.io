@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Fire</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="Fire-Dateien/style_no_stats.css">
+    <style type="text/css">
+        body {
+            background: #0a0a0a;
+            margin: 0px;
+            overflow: hidden;
+        }
+        
+        #webglviewer {
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="webglviewer"></div>
+    <script src="Fire-Dateien/Three.js"></script>
+
+    <script type="text/javascript" src="Fire-Dateien/RequestAnimationFrame.js"></script>
+
+    <script type="text/javascript" src="Fire-Dateien/info.js"></script>
+    <script src="Fire-Dateien/StereoEffect.js"></script>
+    <script src="Fire-Dateien/DeviceOrientationControls.js"></script>
+    <script src="Fire-Dateien/OrbitControls.js"></script>
+    <script src="Fire-Dateien/Detector.js"></script>
+    <script src="Fire-Dateien/stats.min.js"></script>
+
+    <script type="x-shader/x-vertex" id="vertexshader">
+
+        attribute float size; attribute float time; attribute vec3 customColor; uniform float globalTime; varying vec3 vColor; varying float fAlpha; void main() { vColor = customColor; vec3 pos = position; // time float localTime = time + globalTime; float modTime = mod( localTime, 1.0 ); float accTime = modTime * modTime; // animation float angle = accTime * 40.0; vec2 pulse = vec2( sin( angle ) * 20.0, cos( angle ) * 20.0 ); vec3 animated = vec3( pos.x * accTime + pulse.x, pos.y * accTime + pulse.y, pos.z * accTime*1.75 ); fAlpha = (1.0-modTime)*2.0; vec4 mvPosition = modelViewMatrix * vec4( animated, 1 ); gl_PointSize = min(100.0, (accTime*75.0) * ( 150.0 / length( mvPosition.xyz ) ) ); gl_Position = projectionMatrix * mvPosition; }
+
+    </script>
+
+    <script type="x-shader/x-fragment" id="fragmentshader">
+
+        uniform vec3 color; uniform sampler2D texture; varying vec3 vColor; varying float fAlpha; void main() { gl_FragColor = vec4( color * vColor, fAlpha ); gl_FragColor = gl_FragColor * texture2D( texture, gl_PointCoord ); }
+
+    </script>
+
+    <script>
+        var camera, scene, renderer, controls, container, element, effect, clock;
+
+        var has_gl = false;
+
+        var delta
+        var time;
+        var oldTime;
+
+        var particles;
+
+        init();
+        animate();
+
+        function init() {
+
+
+            scene = new THREE.Scene();
+
+            camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 50, 1000);
+            camera.position.z = 800;
+            camera.lookAt(new THREE.Vector3(500, 0, 1500));
+            camera.focus = 100;
+            scene.add(camera);
+
+            var geometry = new THREE.BoxGeometry(500, 500, 500);
+            var material = new THREE.MeshBasicMaterial({
+                color: 0x00ff00
+            });
+            var cube = new THREE.Mesh(geometry, material);
+            cube.position.z = 1500
+                //cube.position.x=20
+                //scene.add( cube );
+
+
+            uniforms = {
+
+                color: {
+                    type: "c",
+                    value: new THREE.Color(0xffffff)
+                },
+                texture: {
+                    type: "t",
+                    value: new THREE.TextureLoader().load("unicorn.png")
+                },
+                globalTime: {
+                    type: "f",
+                    value: 0.0
+                },
+
+            };
+
+            var shaderMaterial = new THREE.ShaderMaterial({
+
+                uniforms: uniforms,
+
+                vertexShader: document.getElementById('vertexshader').textContent,
+                fragmentShader: document.getElementById('fragmentshader').textContent,
+
+                blending: THREE.AdditiveBlending,
+                depthTest: false,
+                transparent: true,
+
+            });
+
+
+            var radius = 800;
+
+            var bufferGeometry = new THREE.BufferGeometry();
+
+            var number_v = 50000;
+
+            var vertices = new Float32Array(number_v * 3);
+            var colors = new Float32Array(number_v * 3);
+            var sizes = new Float32Array(number_v);
+            var times = new Float32Array(number_v);
+
+
+
+
+            for (var i = 0, i3 = 0; i < number_v; i++, i3 += 3) {
+
+                vector = getRandomPointOnSphere(radius);
+                vertices[i3] = vector.x;
+                vertices[i3 + 1] = vector.y;
+                vertices[i3 + 2] = vector.z;
+
+                color = new THREE.Color(0xffffff);
+                color.setHSL(i / number_v, 0.5, 0.7);
+                colors[i3] = color.r;
+                colors[i3 + 1] = color.g;
+                colors[i3 + 2] = color.b;
+
+                times[i] = i / number_v;
+            }
+
+
+            bufferGeometry.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
+            bufferGeometry.addAttribute('customColor', new THREE.BufferAttribute(colors, 3));
+            bufferGeometry.addAttribute('size', new THREE.BufferAttribute(sizes, 1));
+            bufferGeometry.addAttribute('time', new THREE.BufferAttribute(times, 1));
+
+            particles = new THREE.Points(bufferGeometry, shaderMaterial);
+            scene.add(particles);
+
+
+
+            renderer = new THREE.WebGLRenderer({
+                antialias: false
+            });
+
+
+            renderer.setClearColor(0x0a0a0a, 1);
+            renderer.autoClear = true;
+            element = renderer.domElement;
+            container = document.getElementById('webglviewer');
+
+            container.appendChild(element);
+
+            effect = new THREE.StereoEffect(renderer);
+            effect.setEyeSep(3);
+            //effect.setSize( window.innerWidth, window.innerHeight );
+
+
+
+
+            stats = new Stats();
+
+
+            container.appendChild(stats.dom);
+
+            has_gl = true;
+
+            controls = new THREE.OrbitControls(camera, window);
+            /*controls.target.set(
+                     camera.position.x + 0.15,
+                     camera.position.y,
+                     camera.position.z
+                   );*/
+            controls.enablePan = false;
+            controls.enableZoom = false;
+            window.addEventListener('click', fullscreen, false);
+
+            window.addEventListener('resize', onWindowResize, false);
+
+            function setOrientationControls(e) {
+                if (!e.alpha) {
+                    return;
+                }
+                controls = new THREE.DeviceOrientationControls(camera, true);
+                controls.connect();
+                controls.update();
+
+                element.addEventListener('click', fullscreen, false);
+                window.removeEventListener('deviceorientation', setOrientationControls, true);
+            }
+            window.addEventListener('deviceorientation', setOrientationControls, true);
+            clock = new THREE.Clock();
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            effect.setSize(window.innerWidth, window.innerHeight);
+        }
+
+
+        function getRandomPointOnSphere(r) {
+            var angle = Math.random() * Math.PI * 2;
+            var u = Math.random() * 2 - 1;
+
+            var v = new THREE.Vector3(
+                Math.cos(angle) * Math.sqrt(1 - Math.pow(u, 2)) * r,
+                Math.sin(angle) * Math.sqrt(1 - Math.pow(u, 2)) * r,
+                u * r
+            );
+            return v;
+        }
+
+
+        function update(dt) {
+
+            onWindowResize()
+
+            stats.update();
+            controls.update(dt);
+        }
+
+        function animate() {
+
+            requestAnimationFrame(animate);
+            update(clock.getDelta());
+            render();
+
+        }
+
+        function render() {
+
+            time = new Date().getTime();
+            delta = time - oldTime;
+            oldTime = time;
+
+            if (isNaN(delta) || delta > 1000 || delta == 0) {
+                delta = 1000 / 60;
+            }
+
+            uniforms.globalTime.value += delta * 0.00001;
+            particles.rotation.z += 0.0015;
+            //camera.translateZ( - delta*0.01 );
+            //camera.rotation.y=camera.rotation.y+10;
+            if (has_gl) {
+                effect.render(scene, camera);
+            }
+
+        }
+
+        function fullscreen() {
+
+            if (container.requestFullscreen) {
+                container.requestFullscreen();
+            } else if (container.msRequestFullscreen) {
+                container.msRequestFullscreen();
+            } else if (container.mozRequestFullScreen) {
+                container.mozRequestFullScreen();
+            } else if (container.webkitRequestFullscreen) {
+                container.webkitRequestFullscreen();
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>
