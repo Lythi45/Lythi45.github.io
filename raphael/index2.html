@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>Raphael Print Test</title>
+        <script src="raphael.min.js" type="text/javascript" charset="utf-8"></script>
+ <script src="font.js"></script>
+        <script type="text/javascript" charset="utf-8">
+        window.onload = function() {
+            var paper = new Raphael('holder', 640, 480);
+            paper.ellipse(320, 240, 320, 240).attr({stroke: "grey"});
+            paper.print(100, 100, "Test string", paper.getFont("1", 800), 30);
+            paper.text(50, 50, "Raphaël\nkicks\nbutt!");
+        }
+        </script>
+        <style type="text/css">  
+            #holder { width: 640px; height: 480px; border: 2px solid #aaa; }  
+        </style>  
+    </head>  
+    <body>  
+        <div id="holder"></div>  
+    </body>  
+</html>  
