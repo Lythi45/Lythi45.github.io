@@ -7,15 +7,15 @@
         window.onload = function() {
             var paper = new Raphael('holder', 640, 480);
             paper.ellipse(320, 240, 320, 240).attr({stroke: "grey"});
-            paper.print(100, 100, "Test string", paper.getFont("1", 800), 30);
-            paper.text(50, 50, "Raphaël\nkicks\nbutt!");
+            paper.print(100, 100, "Test string", paper.getFont("FreeMono", 800), 30);
+            paper.text(50, 50, "Raphaï¿½l\nkicks\nbutt!");
         }
         </script>
-        <style type="text/css">  
-            #holder { width: 640px; height: 480px; border: 2px solid #aaa; }  
-        </style>  
-    </head>  
-    <body>  
-        <div id="holder"></div>  
-    </body>  
-</html>  
+        <style type="text/css">
+            #holder { width: 640px; height: 480px; border: 2px solid #aaa; }
+        </style>
+    </head>
+    <body>
+        <div id="holder"></div>
+    </body>
+</html>
