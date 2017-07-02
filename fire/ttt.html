@@ -2,9 +2,15 @@
 <html>
 <head>
 <title>P5.js Test</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.4/p5.min.js"></script>
-<script>
- int i;void setup(){fullScreen();}void draw(){translate(i%width,600);blendMode(4<<(i%11));rotate(i++);rect(i/20,0,550,i%40);fill(-i);}
+<script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/p5.js"></script>
+ <script>
+ int i;
+ void setup(){fullScreen();}
+ void draw(){translate(i%width,600);
+             blendMode(4<<(i%11));
+             rotate(i++);
+             rect(i/20,0,550,i%40);
+             fill(-i);}
 </script>
 </head>
 <body>
