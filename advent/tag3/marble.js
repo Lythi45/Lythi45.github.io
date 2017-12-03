@@ -76,8 +76,8 @@ function mouseClicked() {
   var my=(mouseY+py)/100+1;
    randomSeed(mx+my*450);
    var ddd=random(4);//first random value after randomSeed() is shitty
-   var tile=tiles.get(mx+"+"+my,2);
-   if (tile==2) {
+   var tile=tiles[mx+"+"+my];
+   if (tile==undefined) {
    tile=1-int(random(2));} else {
      tile=1-tile;
    }
