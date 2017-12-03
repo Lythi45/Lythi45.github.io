@@ -30,9 +30,9 @@ function draw() {
     var by=(y-1)*blocksize-py;
      var m_t=(x+y)%2;
      var ddd=random(4);//first random value after randomSeed() is shitty
-     var tile=tiles.get(x+"+"+y,2);
+     var tile=tiles[x+"+"+y];
      
-     if (tile==2) {tile=int(random(2));}
+     if (tile==undefined) {tile=int(random(2));}
      
       if (tile>0) {
   if (m_t==0) {image(images[num_b], bx, by);} else
