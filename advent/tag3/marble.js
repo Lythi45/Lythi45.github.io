@@ -1,26 +1,25 @@
 
-PImage[] images = new PImage[100];
-PImage[] images2 = new PImage[100];
-int num_b=0;
+var images=[];
+var images2 = [];
+var num_b=0;
 
-int px=0;
-int py=0;
-int blocksize=100;
-int sx=1200;
-int sy=700;
+var px=0;
+var py=0;
+var blocksize=100;
+var sx=1200;
+var sy=700;
 
-IntDict tiles;
+var tiles={};
 
-void setup() {
-  tiles = new IntDict();
-  size(1200, 700);
+function setup() {
+  createCanvas(1200, 700);
   for (int n=0;n<100;n+=1) {
   images[n] = loadImage("marble1/test"+nf(n+1,3)+".png");
   images2[n] = loadImage("marble2/test"+nf(n+1,3)+".png");
   }
 }
 
-void draw() {
+function draw() {
    num_b=(num_b+100)%100;
      int rx=px/blocksize;
   int ry=py/blocksize;
@@ -49,7 +48,7 @@ void draw() {
   //saveFrame("bild####.png");
 }
 
-void keyPressed() {
+function keyPressed() {
   if (key=='a') {
     px=px-6;;
   }
@@ -72,7 +71,7 @@ void keyPressed() {
   
 }
 
-void mouseClicked() {
+function mouseClicked() {
   int mx=(mouseX+px)/100+1;
   int my=(mouseY+py)/100+1;
    randomSeed(mx+my*450);
@@ -85,9 +84,9 @@ void mouseClicked() {
    tiles.set(mx+"+"+my,tile);
    println("Tile:"+mx+" "+my+" "+mouseX+" "+mouseY+" "+px+" "+py);
 }
-void mousePressed(){
+function mousePressed(){
 }
-void mouseDragged() {
+function mouseDragged() {
   px-=(mouseX-pmouseX);
    py-=(mouseY-pmouseY);
 }
