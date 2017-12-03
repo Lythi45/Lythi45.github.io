@@ -13,7 +13,7 @@ var tiles={};
 
 function setup() {
   createCanvas(1200, 700);
-  for (int n=0;n<100;n+=1) {
+  for (var n=0;n<100;n+=1) {
   images[n] = loadImage("marble1/test"+nf(n+1,3)+".png");
   images2[n] = loadImage("marble2/test"+nf(n+1,3)+".png");
   }
@@ -21,16 +21,16 @@ function setup() {
 
 function draw() {
    num_b=(num_b+100)%100;
-     int rx=px/blocksize;
-  int ry=py/blocksize;
-  for (int x=rx;x<rx+sx/blocksize+2;x=x+1) {
-    for (int y=ry;y<ry+sy/blocksize+2;y=y+1) {
+     var rx=px/blocksize;
+  var ry=py/blocksize;
+  for (var x=rx;x<rx+sx/blocksize+2;x=x+1) {
+    for (var y=ry;y<ry+sy/blocksize+2;y=y+1) {
  randomSeed(x+y*450);
-    int bx=(x-1)*blocksize-px;
-    int by=(y-1)*blocksize-py;
-     int m_t=(x+y)%2;
-     float ddd=random(4);//first random value after randomSeed() is shitty
-     int tile=tiles.get(x+"+"+y,2);
+    var bx=(x-1)*blocksize-px;
+    var by=(y-1)*blocksize-py;
+     var m_t=(x+y)%2;
+     var ddd=random(4);//first random value after randomSeed() is shitty
+     var tile=tiles.get(x+"+"+y,2);
      
      if (tile==2) {tile=int(random(2));}
      
@@ -72,11 +72,11 @@ function keyPressed() {
 }
 
 function mouseClicked() {
-  int mx=(mouseX+px)/100+1;
-  int my=(mouseY+py)/100+1;
+  var mx=(mouseX+px)/100+1;
+  var my=(mouseY+py)/100+1;
    randomSeed(mx+my*450);
-   float ddd=random(4);//first random value after randomSeed() is shitty
-   int tile=tiles.get(mx+"+"+my,2);
+   var ddd=random(4);//first random value after randomSeed() is shitty
+   var tile=tiles.get(mx+"+"+my,2);
    if (tile==2) {
    tile=1-int(random(2));} else {
      tile=1-tile;
