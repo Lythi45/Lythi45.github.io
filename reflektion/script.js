@@ -11,7 +11,7 @@ function setup() {
   background(0);
   noSmooth();
 
-    input = createInput('sin(x)');
+    input = createInput('-cos(x)');
     input.position(20, 65);
 
     button = createButton('submit');
@@ -28,7 +28,7 @@ function setup() {
 }
 
 function greet() {
-  xf=100;yf=150;xs=300;ys=300;
+  xf=200;yf=200;xs=450;ys=300;
   tiny=0.00001;
   var name = input.value();
   //greeting.html('hello '+name+'!');
