@@ -49,7 +49,7 @@ stroke(255);
   }
 
   stroke(255,0,0);
-  for (var xx=-4;xx<4;xx+=0.2){
+  for (var xx=-4;xx<4;xx+=0.1){
     x=xx;
     y=eval(name);
     x=xx+tiny;
