@@ -7,7 +7,7 @@ function setup() {
   var p4 = p3+d;
 
   // Sets the screen to be 720 pixels wide and 400 pixels high
-  createCanvas(800, 400);
+  createCanvas(900, 600);
   background(0);
   noSmooth();
 
@@ -28,7 +28,7 @@ function setup() {
 }
 
 function greet() {
-  xf=100;yf=150;xs=400;ys=200;
+  xf=100;yf=150;xs=300;ys=300;
   tiny=0.00001;
   var name = input.value();
   //greeting.html('hello '+name+'!');
