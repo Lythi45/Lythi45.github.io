@@ -59,7 +59,7 @@ stroke(255);
     wy=sin(winkel)*3;
     line(x,3,x,y);
     line(x,y,x+wx,y+wy);
-    print(x+" "+y+" "+winkel+" "+wx+" "+wy);
+    //print(x+" "+y+" "+winkel+" "+wx+" "+wy);
   }
   pop();
 }
