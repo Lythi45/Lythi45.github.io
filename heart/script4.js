@@ -89,14 +89,11 @@ for (var x=-4; x<4; x+=0.01) {
   ellipse(x*xf+xs,y*yf+ys,10,10)
   xa[i+1]=x;
   ya[i+1]=y;
-  hoeheDiff[i]=(y-ya[i])*2000;
-  print(i,hoeheDiff[i]);
+  hoeheDiff[i]=(y-ya[i])*5000;
   }
-  hoeheDiff[num-1]=(ya[0]-ya[num-1])*2000;
-  print("num-1",num-1);
-  print(hoeheDiff[num-1]);
-
+  wi=0;
 }
+hoeheDiff[num-1]=(ya[0]-ya[num-1])*5000;
 
 function h(x,y) {
   t=(x*x+y*y-1);
@@ -105,7 +102,7 @@ function h(x,y) {
 
 var  NUM_KUGEL=5;
 //how many ticks for a new light
-var  INTERVAL=300;
+var  INTERVAL=100;
 //how many bits the weg value is shifted down to get a pleasant movement of the lights
 var WEG_FAK=12;
 //const long  MAX_WAY=NUM_SEG<<WEG_FAK;
@@ -121,7 +118,7 @@ function draw(){
     print("Neue Kugel");
     print(ticks);
     weg[akt_kugel]=0;
-    tempo[akt_kugel]=random(5000)+2000;
+    tempo[akt_kugel]=random(10000);
     r[akt_kugel]=random(250);
     g[akt_kugel]=random(250);
     b[akt_kugel]=random(250);
@@ -172,7 +169,6 @@ function draw(){
   ticks++;
 
   fill(0);
-
   beginShape();
   vertex(-4*xf+xs,4*yf+ys);
   vertex(0*xf+xs,4*yf+ys);
@@ -185,11 +181,9 @@ function draw(){
   vertex(4*xf+xs,-4*yf+ys);
   vertex(-4*xf+xs,-4*yf+ys);
   endShape();
-
 }
 
 function led(x,y,r,g,b) {
-  if (r>0||g>>0||b>0) {
   fill(r,g,b,30);
   ellipse(x*xf+xs,y*yf+ys,180,180)
   fill(r,g,b,60);
@@ -198,7 +192,6 @@ function led(x,y,r,g,b) {
   ellipse(x*xf+xs,y*yf+ys,30,30)
   fill(r,g,b,255);
   ellipse(xa[i]*xf+xs,ya[i]*yf+ys,10,10)
-}
 }
 
 function random(v) {
