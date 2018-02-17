@@ -93,10 +93,10 @@ for (var x=-4; x<4; x+=0.01) {
   ellipse(x*xf+xs,y*yf+ys,10,10)
   xa[i+1]=x;
   ya[i+1]=y;
-  hoeheDiff[i]=(y-ya[i])*2000;
+  hoeheDiff[i]=(y-ya[i])*1000;
   print(i,hoeheDiff[i]);
   }
-  hoeheDiff[num-1]=(ya[0]-ya[num-1])*2000;
+  hoeheDiff[num-1]=(ya[0]-ya[num-1])*1000;
   print("num-1",num-1);
   print(hoeheDiff[num-1]);
 
@@ -125,7 +125,7 @@ function draw(){
     print("Neue Kugel");
     print(ticks);
     weg[akt_kugel]=72<<WEG_FAK;
-    tempo[akt_kugel]=random(4000)+5000;
+    tempo[akt_kugel]=random(3000)+3000;
     r[akt_kugel]=random(250);
     g[akt_kugel]=random(250);
     b[akt_kugel]=random(250);
