@@ -19,22 +19,26 @@ var num_k_used=0;
 var rl=[];
 var gl=[];
 var bl=[];
+var  xf= 0;
+var yf=0;
+var xs=0;
+var ys= 0;
+
+
 
 function setup() {
 
-
-  createCanvas(900, 600);
+createCanvas(windowWidth, windowHeight);
   background(0);
   noSmooth();
 
 
     textAlign(CENTER);
     textSize(12);
+    xf= windowHeight/3;yf=- windowHeight/3;xs=windowWidth/2;ys= windowHeight*0.5;
 
 heart();
 }
-
-var  xf=200;yf=-200;xs=450;ys=300;
 
 function heart() {
 
@@ -121,7 +125,7 @@ function draw(){
     print("Neue Kugel");
     print(ticks);
     weg[akt_kugel]=0;
-    tempo[akt_kugel]=random(5000)+2000;
+    tempo[akt_kugel]=random(2500)+2000;
     r[akt_kugel]=random(250);
     g[akt_kugel]=random(250);
     b[akt_kugel]=random(250);
@@ -191,13 +195,13 @@ function draw(){
 function led(x,y,r,g,b) {
   if (r>0||g>>0||b>0) {
   fill(r,g,b,30);
-  ellipse(x*xf+xs,y*yf+ys,180,180)
+  ellipse(x*xf+xs,y*yf+ys,225,225)
   fill(r,g,b,60);
-  ellipse(x*xf+xs,y*yf+ys,100,100)
+  ellipse(x*xf+xs,y*yf+ys,125,125)
   fill(r,g,b,80);
-  ellipse(x*xf+xs,y*yf+ys,30,30)
+  ellipse(x*xf+xs,y*yf+ys,38,38)
   fill(r,g,b,255);
-  ellipse(xa[i]*xf+xs,ya[i]*yf+ys,10,10)
+  ellipse(xa[i]*xf+xs,ya[i]*yf+ys,13,13)
 }
 }
 
