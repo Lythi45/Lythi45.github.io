@@ -124,8 +124,8 @@ function draw(){
   if (ticks>=next_tick) {
     print("Neue Kugel");
     print(ticks);
-    weg[akt_kugel]=0;
-    tempo[akt_kugel]=random(2500)+2000;
+    weg[akt_kugel]=72<<WEG_FAK;
+    tempo[akt_kugel]=random(4000)+5000;
     r[akt_kugel]=random(250);
     g[akt_kugel]=random(250);
     b[akt_kugel]=random(250);
