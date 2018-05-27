@@ -37,8 +37,8 @@ _stereo.eyeSep=eyesep;
 		renderer.setViewport( 0, 0, size.width / 2, size.height );
 		renderer.render( scene, _stereo.cameraL );
 
-		renderer.setScissor( size.width / 2, 0, size.width / 2, size.height );
-		renderer.setViewport( size.width / 2, 0, size.width / 2, size.height );
+		renderer.setScissor( size.width / 2.2, 0, size.width / 2, size.height );
+		renderer.setViewport( size.width / 2.2, 0, size.width / 2, size.height );
 		renderer.render( scene, _stereo.cameraR );
 
 		renderer.setScissorTest( false );
