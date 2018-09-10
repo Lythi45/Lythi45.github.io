@@ -250,7 +250,7 @@ var bufferLength = analyser.frequencyBinCount;
 			//camera.rotation.y=camera.rotation.y+10;
       analyser.getByteFrequencyData(dataArray);
       
-      for (i=0;i<32;i++) {dtdata[i]=dataArray[i];}
+      for (i=0;i<32;i++) {dtdata[i]=255;}
       dynamicTexture.needsUpdate = true;
       
 			if (has_gl) {
