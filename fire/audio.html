@@ -83,6 +83,7 @@ href = "Fire-Dateien/style_no_stats.css" >
 		var oldTime;
 		var particles;
     var analyser;
+	var dataArray;
     var dtdata;
     var dynamicTexture;
 		init();
@@ -106,9 +107,6 @@ camera.add( listener );
 
 // create an Audio source
 var sound = new THREE.Audio( listener );
-var bufferLength = analyser.frequencyBinCount;
-var dataArray = new Uint8Array(bufferLength);
- 
 // load a sound and set it as the Audio object's buffer
 var audioLoader = new THREE.AudioLoader();
 audioLoader.load( 'sounds/pipers.ogg', function( buffer ) {
@@ -119,6 +117,8 @@ audioLoader.load( 'sounds/pipers.ogg', function( buffer ) {
 });
 // create an AudioAnalyser, passing in the sound and desired fftSize
 analyser = new THREE.AudioAnalyser( sound, 32 );
+var bufferLength = analyser.frequencyBinCount;
+    dataArray = new Uint8Array(bufferLength);
       
       
 			//var cube = new THREE.Mesh(geometry, material);
