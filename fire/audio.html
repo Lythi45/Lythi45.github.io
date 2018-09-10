@@ -189,14 +189,14 @@ analyser = new THREE.AudioAnalyser( sound, 32 );
 			stats = new Stats();
 			container.appendChild(stats.dom);
 			has_gl = true;
-			//controls = new THREE.OrbitControls(camera, window);
+			controls = new THREE.OrbitControls(camera, window);
 			/*controls.target.set(
 			         camera.position.x + 0.15,
 			         camera.position.y,
 			         camera.position.z
 			       );*/
-			//controls.enablePan = false;
-			//controls.enableZoom = false;
+			controls.enablePan = false;
+			controls.enableZoom = false;
 			window.addEventListener('click', fullscreen, false);
 			window.addEventListener('resize', onWindowResize, false);
 			function setOrientationControls(e) {
