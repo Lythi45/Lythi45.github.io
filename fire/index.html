@@ -228,14 +228,14 @@ href = "Fire-Dateien/style_no_stats.css" >
 
 			has_gl = true;
 
-			//controls = new THREE.OrbitControls(camera, window);
+			controls = new THREE.OrbitControls(camera, window);
 			/*controls.target.set(
 			         camera.position.x + 0.15,
 			         camera.position.y,
 			         camera.position.z
 			       );*/
-			//controls.enablePan = false;
-			//controls.enableZoom = false;
+			controls.enablePan = false;
+			controls.enableZoom = false;
 			window.addEventListener('click', fullscreen, false);
 
 			window.addEventListener('resize', onWindowResize, false);
@@ -248,7 +248,7 @@ href = "Fire-Dateien/style_no_stats.css" >
 				controls.connect();
 				controls.update();
 
-				//element.addEventListener('click', fullscreen, false);
+				element.addEventListener('click', fullscreen, false);
 				window.removeEventListener('deviceorientation', setOrientationControls, true);
 			}
 			window.addEventListener('deviceorientation', setOrientationControls, true);
