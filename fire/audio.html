@@ -250,8 +250,9 @@ var bufferLength = analyser.frequencyBinCount;
 			//camera.translateZ(-delta * 0.01);
 			//camera.rotation.y=camera.rotation.y+10;
 			console.log(time)
-			//analyser = new THREE.AudioAnalyser( sound, 32 );
+			analyser = new THREE.AudioAnalyser( sound, 32 );
             analyser.getFrequencyData(dataArray);
+			var data = analyser.getAverageFrequency();
       
       for (i=0;i<32;i++) {
 	  dtdata[i*4]=dataArray[i];
