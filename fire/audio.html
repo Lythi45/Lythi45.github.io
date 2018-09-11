@@ -82,6 +82,7 @@ href = "Fire-Dateien/style_no_stats.css" >
 		var time;
 		var oldTime;
 		var particles;
+		var sound 
     var analyser;
 	var dataArray;
     var dtdata;
@@ -106,7 +107,7 @@ var listener = new THREE.AudioListener();
 camera.add( listener );
 
 // create an Audio source
-var sound = new THREE.Audio( listener );
+    sound = new THREE.Audio( listener );
 // load a sound and set it as the Audio object's buffer
 var audioLoader = new THREE.AudioLoader();
 audioLoader.load( 'sounds/pipers.ogg', function( buffer ) {
@@ -249,7 +250,8 @@ var bufferLength = analyser.frequencyBinCount;
 			//camera.translateZ(-delta * 0.01);
 			//camera.rotation.y=camera.rotation.y+10;
 			console.log(time)
-      analyser.getByteFrequencyData(dataArray);
+			analyser = new THREE.AudioAnalyser( sound, 32 );
+            analyser.getByteFrequencyData(dataArray);
       
       for (i=0;i<32;i++) {
 	  dtdata[i*4]=dataArray[i];
