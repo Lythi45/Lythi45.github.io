@@ -125,8 +125,8 @@ var bufferLength = analyser.frequencyBinCount;
 			//cube.position.z = 1500
 				//cube.position.x=20
 			//scene.add(cube);
-      dtdata = new Uint8Array( 32 );
-      dynamicTexture	= new THREE.DataTexture(dtdata,32,1,THREE.AlphaFormat)
+      dtdata = new Uint8Array( 32*4 );
+      dynamicTexture	= new THREE.DataTexture(dtdata,32,1,THREE.RGBAFormat)
       
 			uniforms = {
 				color: {
@@ -250,9 +250,8 @@ var bufferLength = analyser.frequencyBinCount;
 			//camera.rotation.y=camera.rotation.y+10;
 			console.log(time)
       //analyser.getByteFrequencyData(dataArray);
-	  console.log(dataArray)
       
-      for (i=0;i<32;i++) {dtdata[i]=i*7;}
+      for (i=0;i<32*4;i++) {dtdata[i]=i*1.97;}
       dynamicTexture.needsUpdate = true;
       
 			if (has_gl) {
