@@ -13,7 +13,7 @@ function csv() {
 csvContent="data:text/csv;charset=utf-8,first_name;last_name;email;phone_number\n";
 
 for(i=0;i<count;i++) {
-	csvContent+=firstName.sample()+";"+name.sample()+";"+mail+i+"@ubirch.com;"+phone+"\n";
+	csvContent+=firstName.sample()+";"+name.sample()+";"+mail+i+"@testxxxx.com;"+phone+"\n";
 }
 //console.log(csvContent);
 
